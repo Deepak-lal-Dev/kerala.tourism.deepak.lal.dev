@@ -205,6 +205,21 @@ p{
     color: lightgray;
 }
 
+input[type="password"]{
+    width: 100%;
+    box-shadow:  -2px  -2px 3px rgb(255, 255, 255),
+   2px 2px 3px rgb(209, 209, 209);
+   color: lightgray;
+   font-size: 15px;
+}
+
+input[type="password"]:hover{
+  width: 100%;
+  box-shadow: inset -2px  -2px 3px rgb(255, 255, 255),
+  inset 2px 2px 3px rgb(209, 209, 209);
+  color: lightgray;
+}
+
 label[class="form-label"]{
     font-size: 20px;
     margin-left: 2%;
@@ -259,3 +274,35 @@ div.copy{
     color: #03002e;
 }
 /* footer */
+
+
+
+/* password css */
+#showpass {
+    position: absolute;
+    right: 10px;
+    top: 52%;
+    transform: translatex(-85%);
+    cursor: pointer;
+}
+
+
+.valid {
+    color: #4bee74;
+}
+
+.valid:before {
+    position: relative;
+    left: -2px;
+    content: "✔";
+}
+
+.invalid {
+    color: #ec2e4e;
+}
+
+.invalid:before {
+    position: relative;
+    left: -2px;
+    content: "✖";
+   }

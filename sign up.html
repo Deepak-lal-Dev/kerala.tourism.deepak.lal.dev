@@ -24,9 +24,12 @@
   
       <link rel="stylesheet" href="./css/bootstrap-4-sidebar.css">
       <link rel="stylesheet" href="./css/signup.css">
-      
-  
-      
+
+      <!-- font -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+      <!-- font -->
   
   <link rel="stylesheet" href="https://unpkg.com/browse/bootstrap@4.1.0/dist/css/bootstrap-reboot.min.css">
     <title>kerala-tourism</title>
@@ -85,6 +88,54 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <!-- bootstrap Js end -->
+
+<!-- validation script -->
+<!-- <script>
+function submit()
+{
+
+  if (validate())
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+
+
+}
+
+function validate()
+                      {
+                        var number = document.getElementById("validationDefault06");
+                        var regex1 = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+                        if ( number =="")
+                        {
+                          document.getElementById("phoneerror").innerHTML="Phone Number can not be blank";
+                          return false;
+                        }
+                        else if (!number.matches(regex1))
+                        {
+                          
+                          document.getElementById("phoneerror").innerHTML="Phone Number is invalid <br> VALID Format XXX-XXX-XXXX, XXX.XXX.XXXX, XXX XXX XXXX";
+                          return false;
+
+                        }else
+
+                        {
+                        return true;
+                        }
+
+
+                        
+                      }
+
+
+</script> -->
+
+
+<!-- validation script -->
 <div class="blank my-5">
 
 </div>
@@ -120,17 +171,19 @@
 
 
 
-                <form class="form">
+                <form class="form" action="./index.html" onsubmit="return submitform()">
 
                   <div class="col my-2 ">
                     <div class="row">
                       <div class="name col">
                         <label for="validationDefault01" class="form-label">First-Name</label>
-                      <input type="text" class="form-control np-element" id="validationDefault01" value="Enter Username" required>
+                      <input type="text" class="form-control np-element" id="validationDefault001" style="color: #03002e;" onkeyup="firstname()" required>
+                      <label for="validationDefault05" class="f-name-validate" id="f-name" style="color: #E9373D; display: none;"></label>
                       </div>
                       <div class="name col">
                         <label for="validationDefault01" class="form-label">Last-Name</label>
-                      <input type="text" class="form-control np-element" id="validationDefault01" value="Enter Username" required>
+                      <input type="text" class="form-control np-element" id="validationDefault00" style="color: #03002e;" required>
+                      <label for="validationDefault05" class="l-name-validate" id="l-name" style="color: #E9373D; display: none;"></label>
                       </div>
                     </div>
                     
@@ -141,18 +194,63 @@
                     <div class="col my-2">
                         
                       <label for="validationDefault01" class="form-label">E-mail</label>
-                      <input type="text" class="form-control np-element" id="validationDefault01" value="Enter e-mail" required>
+                      <input type="text" class="form-control np-element" id="validationDefault02" style="color: #03002e;" onkeyup="validateemail()" required>
+                      <label for="validationDefault05" class="email-validate-label" id="email-error" style="color: #E9373D; display: none;"></label>
                     </div>
-                    <div class="col my-2">
-                      
+                    <div class="col my-2" style="position: relative;">
+                       
                       <label for="validationDefault05" class="form-label">Type Password</label>
-                      <input type="text" class="form-control np-element" id="validationDefault05" value="Type Password" required>
+                      <input type="password" class="form-control np-element" id="validationDefault08" style="color: #03002e;"  onkeyup="return validatepass()" required><i class="fa-solid fa-eye" id="showpass" style="color: lightgray;" onclick="showpassword()"></i>
+
+
+                      <div class="indicator" id="indicator" style="height: 10px; display: flex; align-items: center; justify-content: space-between; margin: 10px 0; position: relative;"></div>
+
+
+                      <label for="validationDefault05" class="password-validate-label" id="password-text" style="color: #E9373D; display: none;"></label>
+
+                      <div class="passinstruction" style="display: none; position: relative;" id="passinstruction">
+                        <h6>Password must contain:</h6>
+                        <p id="lower" class="invalid"> A <b style="color: #4bee74;">lowercase</b></p>
+                        <p id="upper" class="invalid"> An <b style="color: #4bee74;">uppercase</b></p>
+                        <p id="char" class="invalid"> A <b style="color: #4bee74;">special characters</b></p>
+                        <p id="number" class="invalid"> A <b style="color: #4bee74;">number</b></p>
+                        <p id="length" class="invalid"> Minimum <b style="color: #4bee74;">8 characters</b></p>
+                      </div>
+                      
                     </div>
+                    
                     <div class="col my-2">
                       
                     <label for="validationDefault05" class="form-label">Re-type Password</label>
-                    <input type="text" class="form-control np-element" id="validationDefault05" value="Re-type Password" required>
+                    <input type="password" class="form-control np-element" id="validationDefault05" style="color: #03002e;"  onkeyup="confirmpass()" required>
+                    <label for="validationDefault000" class="form-label"  id="confirmpass" style="color: #E9373D; display: none;"></label>
                   </div>
+                  <div class="col my-2">
+                      
+                    <label for="validationDefault05" class="form-label">Mobile Number</label>
+                    <input type="text" class="form-control np-element" id="validationDefault06" style="color: #03002e;" onkeyup="validatephone()" required>
+                    <label for="validationDefault05" class="mobile-validate-label" id="phone-error" style="color: #E9373D;" ></label>
+                  </div>
+
+                  <!-- <div class="row">
+                    <div class="col my-2">
+                      
+                      <label for="validationDefault05" class="form-label">Male</label>
+                      <input type="radio" class="form-control" id="validationDefault06" style="color: #03002e; text-align: left;" required>
+                    
+                    </div>
+  
+                    <div class="col my-2 ">
+                      <label for="validationDefault05" class="form-label">Female</label>
+                      <input type="radio" class="form-control" id="validationDefault06" style="color: #03002e; justify-content: left;" required>
+                      
+                    </div>
+
+
+
+                  </div> -->
+
+                 
                     <div class="col-12">
                       <div class="form-check my-3">
                         <input class="form-check-input np-element" type="checkbox" value="" id="invalidCheck2" required>
@@ -179,6 +277,281 @@
         </div>
     </div>
 </div>
+
+<script>
+var emailerror = document.getElementById('email-error');
+    var passwordtext = document.getElementById('password-text');
+    var phoneerror = document.getElementById('phone-error');
+    var cpassrror = document.getElementById('confirmpass');
+    var indicator = document.getElementById('indicator');
+    var weak = document.getElementById('weak');
+    var medium = document.getElementById('medium');
+    var strong = document.getElementById('strong');
+    var showpass = document.getElementById('showpass');
+    let pass=document.getElementById('validationDefault08');
+    let confrmpass=document.getElementById('validationDefault05');
+    var firstname = document.getElementById('validationDefault001');
+    var lastname = document.getElementById('validationDefault00');
+    var fnameerror = document.getElementById('f-name');
+    var lnameerror = document.getElementById('l-name');
+
+    
+
+   
+  
+    
+    
+
+    function validatephone()
+    {
+        var mob = document.getElementById('validationDefault06').value;
+
+        if (mob.length == 0){
+            phoneerror.innerHTML='Phone number is required';
+            return false;
+        }
+        else if (!mob.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/))
+        {
+            phoneerror.innerHTML='Phone number must be in valid formate <br> VALID Formate<br> XXX-XXX-XXXX, XXX.XXX.XXXX, XXX XXX XXXX';
+            return false;
+        }else
+       
+        phoneerror.innerHTML='<label style="color: seagreen;">Mobile number is valid <i class="fa-solid fa-circle-check" style="color: seagreen;"></i></label></p>';
+            
+            
+            return true; 
+   
+    }
+
+    function validateemail()
+    {
+        var mail = document.getElementById('validationDefault02').value;
+
+        if (mail.length == 0){
+          emailerror.innerHTML='e-mail is required';
+          emailerror.style.display="block";
+            return false;
+        }
+        else if (!mail.match(/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/))
+        {
+          emailerror.innerHTML='Please put a valid email address';
+          emailerror.style.display="block";
+            return false;
+        }else
+        emailerror.style.display="block";
+        emailerror.innerHTML='<label style="color: seagreen;">Email is valid <i class="fa-solid fa-circle-check" style="color: seagreen;"></i></label></p>';
+            
+            
+            return true; 
+   
+    }
+    function validatepass() {
+     
+    let pwd = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    if (pwd.test(pass.value.trim()) == false && pass.value.trim() == "") {
+        
+        return false;
+    } else {
+       return true
+    }
+}
+
+// show password
+
+    function showpassword(){
+
+      if(pass.getAttribute('type')==='password'){
+        pass.setAttribute('type','text');
+        showpass.style.color='#03002e';
+        
+      }
+      else
+      {
+        pass.setAttribute('type','password');
+        showpass.style.color='lightgray';
+        
+      }
+
+    }
+
+    // password vallidation text
+    pass.onfocus = function() {
+    document.getElementById('passinstruction').style.display = "block";
+    showpass.style.top = "16%"
+}
+
+pass.onkeyup = function() {
+
+var lower = document.getElementById("lower");
+var upper = document.getElementById("upper");
+var char = document.getElementById("char");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+
+var score = 0;
+
+
+var lowerCase = /[a-z]/g;
+
+if (pass.value.trim().match(lowerCase)) {
+    lower.classList.remove("invalid");
+    lower.classList.add("valid");
+    score += 20;
+} else {
+    lower.classList.remove("valid");
+    lower.classList.add("invalid");
+}
+
+var upperCase = /[A-Z]/g;
+
+if (pass.value.trim().match(upperCase)) {
+    upper.classList.remove("invalid");
+    upper.classList.add("valid");
+    score += 20;
+} else {
+    upper.classList.remove("valid");
+    upper.classList.add("invalid");
+}
+
+var characterss = /[\!\@\#\$\%\^\&\*\)\(\+\=\.\<\>\{\}\[\]\:\;\'\"\|\~\`\_\-]/g
+
+if (pass.value.trim().match(characterss)) {
+    char.classList.remove("invalid");
+    char.classList.add("valid");
+    score += 20;
+} else {
+    char.classList.remove("valid");
+    char.classList.add("invalid");
+}
+
+
+var numbers = /[0-9]/g;
+if (pass.value.trim().match(numbers)) {
+
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+    score += 20;
+} else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+}
+
+
+if (pass.value.trim().length >= 8) {
+
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+    score += 20;
+    
+} else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+
+}
+if (score >= 100) {
+
+    indicator.style.width = "100%";
+    indicator.classList.remove('bg-primary');
+    indicator.style.backgroundColor =  "#4bee74";
+    indicator.style.borderRadius = "5px";
+    passwordtext.style.display = "block";
+    passwordtext.innerText = "Password is Strong";
+    passwordtext.style.marginLeft = "32%"
+    passwordtext.style.color = "#4bee74"
+    showpass.style.top = "14.5%"
+    passwordtext.style.fontWeight = "600"
+    
+    
+    
+} else if (score >= 75) {
+    indicator.style.width = "75%";
+    indicator.classList.remove('bg-primary');
+    indicator.style.backgroundColor = "#f97a08";
+    indicator.style.borderRadius = "5px";
+    passwordtext.style.display = "block";
+    passwordtext.innerText = "Password is Medium";
+    passwordtext.style.color = "#f97a08"
+    passwordtext.style.marginLeft = "32%"
+    showpass.style.top = "14.5%"
+    passwordtext.style.fontWeight = "600"
+    
+    
+} else if (score >= 50) {
+    indicator.style.width = "50%";
+    indicator.classList.remove('bg-primary');
+    indicator.style.backgroundColor = "#F7C82D";
+    indicator.style.borderRadius = "5px";
+    passwordtext.style.display = "block";
+    passwordtext.innerText = "Password is Weak";
+    passwordtext.style.color = "#F7C82D"
+    passwordtext.style.marginLeft = "32%"
+    showpass.style.top = "14.5%"
+    passwordtext.style.fontWeight = "600"
+    
+    
+} else if (score >= 25) {
+    indicator.style.width = "25%";
+    indicator.classList.remove('bg-primary');
+    indicator.style.backgroundColor = "#ec2e4e";
+    indicator.style.borderRadius = "5px";
+    passwordtext.style.display = "block";
+    passwordtext.innerText = "Password is too weak";
+    passwordtext.style.color = "#ec2e4e"
+    passwordtext.style.marginLeft = "30%"
+    showpass.style.top = "14.5%"
+    passwordtext.style.fontWeight = "600"
+    
+} else if (score == 0) {
+    indicator.style.width = "0%";
+    passwordtext.style.display = "none"
+    showpass.style.top = "16%"
+}
+
+}
+
+// CONFIRM PASSWORD
+function confirmpass() {
+    let pwd = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    
+    if (confrmpass.value == 0){
+      cpassrror.style.display='none';
+    }
+
+    
+    else if (pass.value.trim() == confrmpass.value.trim()) {
+        return true;
+
+    } else {
+      cpassrror.style.display = 'block';
+      cpassrror.innerText="Password Doesn't match";
+        
+        return false;
+    }
+
+  }
+
+  function submitform() {
+
+if (validatephone() && validateemail() && validatepass() && confirmpass()) {
+    return true;
+} else {
+    return false;
+}
+
+}
+
+ 
+
+
+    
+    
+    
+    
+    
+    </script>
+
+
+
 
 
 <!-- footer -->
